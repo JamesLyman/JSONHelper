@@ -95,21 +95,21 @@ public func <<< <T>(inout property: T?, value: AnyObject?) -> T? {
     } else if property is Int? && unwrappedValue is String { // String -> Int
 
       if let intValue = "\(unwrappedValue)".toInt() {
-        newValue = intValue as T
+        newValue = intValue as? T
       }
     } else if property is NSURL? { // String -> NSURL
 
       if let stringValue = unwrappedValue as? String {
-        newValue = NSURL(string: stringValue) as T?
+        newValue = NSURL(string: stringValue) as? T
       }
     } else if property is NSDate? { // Int || Double || NSNumber -> NSDate
 
       if let timestamp = value as? Int {
-        newValue = NSDate(timeIntervalSince1970: Double(timestamp)) as T
+        newValue = NSDate(timeIntervalSince1970: Double(timestamp)) as? T
       } else if let timestamp = value as? Double {
-        newValue = NSDate(timeIntervalSince1970: timestamp) as T
+        newValue = NSDate(timeIntervalSince1970: timestamp) as? T
       } else if let timestamp = value as? NSNumber {
-        newValue = NSDate(timeIntervalSince1970: timestamp.doubleValue) as T
+        newValue = NSDate(timeIntervalSince1970: timestamp.doubleValue) as? T
       }
     }
   }
